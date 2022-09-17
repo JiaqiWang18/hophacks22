@@ -1,4 +1,5 @@
 from django.db import models
+import requests, os
 from users.models import User
 
 CAT_CHOICES = (
@@ -16,6 +17,23 @@ class Store(models.Model):
     lat = models.IntegerField(default=39.290386)
     long = models.IntegerField(default=-76.612190)
     video_tour = models.FileField(upload_to='videos', blank=True)
+    address = models.CharField(max_length=100, default="Johns Hopkins University, Baltimore")
+
+    # geocode upon saving
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        if self.address:
+            current_address = self.address
+            self.long, self.long = self.geocode(current_address)
+        super(Store, self).save()
+
+    def geocode(self, address):
+        url = 'https://maps.googleapis.com/maps/api/geocode/json'
+        params = {'sensor': 'false', 'address': address, 'key': 'AIzaSyA9GG_FwcMPB1TOXIRpmVJojNHLPf-QZeo'}
+        r = requests.get(url, params=params)
+        results = r.json()['results']
+        location = results[0]['geometry']['location']
+        return location['lat'], location['lng']
 
     def __str__(self):
         return self.name

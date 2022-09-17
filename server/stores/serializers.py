@@ -1,5 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-from drf_extra_fields.fields import Base64FileField
 from stores.models import Store, AccessibilityCategory
 from users.serializers import UserSerializer
 
