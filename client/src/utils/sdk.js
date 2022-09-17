@@ -1,3 +1,4 @@
+import { getCookie } from 'components/CSRFToken';
 import { history } from 'config/routes';
 import { LOGIN_URL } from 'config/urls';
 
@@ -8,7 +9,10 @@ export const BASE_API_URL = `${process.env.REACT_APP_BASE_BACKEND_URL}/api/v1`;
 const getBaseConfig = method => ({
   method,
   credentials: 'include',
-  headers: { 'Content-Type': 'application/json' }
+  headers: {
+    'Content-Type': 'application/json',
+    'X-CSRFToken': getCookie('csrftoken')
+  }
 });
 
 const handle401 = resp => {

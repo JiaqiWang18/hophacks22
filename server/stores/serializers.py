@@ -1,6 +1,8 @@
 from rest_framework.serializers import ModelSerializer
+from drf_extra_fields.fields import Base64FileField
 from stores.models import Store, AccessibilityCategory
 from users.serializers import UserSerializer
+
 
 class AccessibilityCategorySerializer(ModelSerializer):
     class Meta:
@@ -9,8 +11,9 @@ class AccessibilityCategorySerializer(ModelSerializer):
 
 
 class StoreSerializer(ModelSerializer):
-    accessibility_categories = AccessibilityCategorySerializer(many=True)
-    owner = UserSerializer()
+    accessibility_categories = AccessibilityCategorySerializer(many=True, required=False)
+    owner = UserSerializer(required=False)
+
     class Meta:
         model = Store
         fields = '__all__'

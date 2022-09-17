@@ -1,5 +1,6 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from stores.serializers import StoreSerializer, AccessibilityCategorySerializer
 from stores.models import Store, AccessibilityCategory
 
@@ -7,6 +8,10 @@ from stores.models import Store, AccessibilityCategory
 class StoreViewSet(viewsets.ModelViewSet):
     serializer_class = StoreSerializer
     queryset = Store.objects.all()
+    # def perform_create(self, serializer):
+    #     print("PRINT USER")
+    #     print(self.request.user)
+    #     return serializer.save(owner=self.request.user)
 
     def list(self, request, *args, **kwargs):
         category = request.GET.get('category')
