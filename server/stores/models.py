@@ -17,6 +17,7 @@ class Store(models.Model):
     lat = models.IntegerField(default=39.290386)
     long = models.IntegerField(default=-76.612190)
     video_tour = models.FileField(upload_to='videos', blank=True)
+    store_image = models.FileField(upload_to='images', blank=True, null=True)
     address = models.CharField(max_length=100, default="Johns Hopkins University, Baltimore")
 
     # geocode upon saving

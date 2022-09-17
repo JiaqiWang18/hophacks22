@@ -12,16 +12,24 @@ const options = [
 
 export default function NewStore() {
   const [storeName, setStoreName] = useState('');
+  const [address, setAddress] = useState('');
   const [ownerFirstName, setOwnerFirstName] = useState('');
   const [ownerLastName, setOwnerLastName] = useState('');
   const [category, setCategory] = useState(options[1]);
   const [video, setVideo] = useState();
+  const [image, setImage] = useState();
 
   const handleSubmit = e => {
     e.preventDefault();
     let form_data = new FormData();
-    form_data.append('video_tour', video, video.name);
+    if (video) {
+      form_data.append('video_tour', video, video.name);
+    }
+    if (image) {
+      form_data.append('store_image', image, image.name);
+    }
     form_data.append('name', storeName);
+    form_data.append('address', address);
     form_data.append('owner_fist_name', ownerFirstName);
     form_data.append('owner_last_name', ownerLastName);
     form_data.append('store_category', category.value);
@@ -54,6 +62,16 @@ export default function NewStore() {
           />
         </div>
         <div className="form-group">
+          <label htmlFor="exampleFormControlInput1">Address</label>
+          <input
+            type="text"
+            className="form-control"
+            id="exampleFormControlInput1"
+            value={address}
+            onChange={e => setAddress(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
           <label htmlFor="exampleFormControlInput1">Owner First Name</label>
           <input
             type="email"
@@ -81,6 +99,20 @@ export default function NewStore() {
             options={options}
             value={category}
             onChange={e => setCategory(e)}
+          />
+        </div>
+        <div className="form-group">
+          <label class="form-label" for="customFile">
+            Upload an image of your storefront
+          </label>
+          <input
+            type="file"
+            class="form-control"
+            id="customFile"
+            onChange={e => {
+              console.log(e.target.files);
+              setImage(e.target.files[0]);
+            }}
           />
         </div>
         <div className="form-group">
