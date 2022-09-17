@@ -14,7 +14,7 @@ const Home = () => {
     <div class="s01">
       <form>
         <fieldset>
-          <legend>ADAbility</legend>
+          <legend>=ADAbility</legend>
         </fieldset>
         <div class="under">
           <input id="caption" type="" text placeholder="Regain your footing." />

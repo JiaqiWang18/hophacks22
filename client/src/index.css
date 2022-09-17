@@ -5,6 +5,9 @@
 
 body {
   margin: 0;
+  /* background: url('./pages/Home/background.png');
+  background-size: cover;
+  background-position: center center; */
 }
 
 code {
@@ -15,4 +18,15 @@ code {
 :root {
   --grey: #707070;
   --orange: #f68c0d;
+}
+
+.card .card-image {
+  width: 100%;
+  max-height: 340px;
+}
+
+.card .card-image img {
+  width: 100%;
+  max-height: 340px;
+  object-fit: cover;
 }

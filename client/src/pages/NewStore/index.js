@@ -4,6 +4,7 @@ import CSRFToken from 'components/CSRFToken';
 import axios from 'axios';
 import { getConfig } from '@testing-library/react';
 import { BASE_API_URL } from 'utils/sdk';
+import { useHistory } from 'react-router-dom';
 
 const options = [
   { value: 'RESTAURANT', label: 'Restaurant' },
@@ -18,7 +19,7 @@ export default function NewStore() {
   const [category, setCategory] = useState(options[1]);
   const [video, setVideo] = useState();
   const [image, setImage] = useState();
-
+  const history = useHistory();
   const handleSubmit = e => {
     e.preventDefault();
     let form_data = new FormData();
@@ -42,6 +43,7 @@ export default function NewStore() {
       })
       .then(res => {
         console.log(res.data);
+        history.push('/');
       })
       .catch(err => console.log(err));
   };
