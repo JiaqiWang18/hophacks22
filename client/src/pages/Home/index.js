@@ -16,9 +16,6 @@ const Home = () => {
         <fieldset>
           <legend>=ADAbility</legend>
         </fieldset>
-        <div class="under">
-          <input id="caption" type="" text placeholder="Regain your footing." />
-        </div>
         <div class="inner-form">
           <div class="input-field first-wrap">
             <input
