@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { get } from 'utils/sdk';
+import { useHistory } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  let history = useHistory();
 
   const doSearch = () => {
-    get(`stores/?category=${searchTerm}`).then(resp => {
-      console.log(resp);
-    });
+    history.push(`/result/${searchTerm}`);
   };
 
   return (
