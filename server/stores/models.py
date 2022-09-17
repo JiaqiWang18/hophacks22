@@ -1,9 +1,15 @@
 from django.db import models
 from users.models import User
 
+CAT_CHOICES = (
+    ("RESTAURANT", 'Restaurant'),
+    ("GROCERY STORE", 'Grocery Store')
+)
+
 
 class Store(models.Model):
     name = models.CharField(max_length=40)
+    store_category = models.CharField(max_length=40, choices=CAT_CHOICES, default='RESTAURANT')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     owner_fist_name = models.CharField(max_length=40)
     owner_last_name = models.CharField(max_length=40)
@@ -15,7 +21,7 @@ class Store(models.Model):
         return self.name
 
 
-CAT_CHOICES = (
+ACC_CAT_CHOICES = (
     ("PARKING", "Parking"),
     ("RAMP", "Ramp"),
     ("ELEVATORS", "Elevators"),
@@ -23,7 +29,7 @@ CAT_CHOICES = (
 
 
 class AccessibilityCategory(models.Model):
-    name = models.CharField(max_length=40, choices=CAT_CHOICES, default='PARKING')
+    name = models.CharField(max_length=40, choices=ACC_CAT_CHOICES, default='PARKING')
     satisfied = models.BooleanField(default=False)
     image_evidence = models.ImageField(upload_to='images')
     store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='accessibility_categories')
