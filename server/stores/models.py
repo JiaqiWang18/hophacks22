@@ -14,8 +14,8 @@ class Store(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     owner_fist_name = models.CharField(max_length=40)
     owner_last_name = models.CharField(max_length=40)
-    lat = models.IntegerField(default=39.290386)
-    long = models.IntegerField(default=-76.612190)
+    lat = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    long = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
     video_tour = models.FileField(upload_to='videos', blank=True)
     store_image = models.FileField(upload_to='images', blank=True, null=True)
     address = models.CharField(max_length=100, default="Johns Hopkins University, Baltimore")
@@ -25,7 +25,7 @@ class Store(models.Model):
              update_fields=None):
         if self.address:
             current_address = self.address
-            self.long, self.long = self.geocode(current_address)
+            self.lat, self.long = self.geocode(current_address)
         super(Store, self).save()
 
     def geocode(self, address):

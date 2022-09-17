@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import GoogleButton from 'react-google-button';
 
 import { notifyError } from 'utils/notifications';
-import {  Layout } from 'components';
+import { Layout } from 'components';
 
 import styles from './Login.module.css';
 
@@ -49,7 +49,7 @@ const Login = () => {
 
   return (
     <Layout className={styles.content}>
-      <h1 className={styles.pageHeader}>Welcome to our Demo App!</h1>
+      <h1 className={styles.pageHeader}>Log In</h1>
       <GoogleButton
         onClick={openGoogleLoginPage}
         label="Sign in with Google"
