@@ -26,7 +26,7 @@ class AccessibilityCategory(models.Model):
     name = models.CharField(max_length=40, choices=CAT_CHOICES, default='PARKING')
     satisfied = models.BooleanField(default=False)
     image_evidence = models.ImageField(upload_to='images')
-    store = models.ForeignKey(Store, on_delete=models.CASCADE)
+    store = models.ForeignKey(Store, on_delete=models.CASCADE, related_name='accessibility_categories')
 
     def __str__(self):
         return self.name
