@@ -16,7 +16,7 @@ class StoreViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         category = request.GET.get('category')
         if category:
-            queryset = Store.objects.filter(store_category__contains=category)
+            queryset = Store.objects.filter(store_category__contains=category.upper())
         else:
             queryset = Store.objects.all()
         serializer = StoreSerializer(queryset, many=True)
