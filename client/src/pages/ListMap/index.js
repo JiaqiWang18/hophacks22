@@ -10,40 +10,45 @@ const ListMap = ({ match }) => {
 
   useEffect(() => {
     //specify that
-    console.log(match.params.category);
     get(`stores/?category=${match.params.category}`).then(resp => {
       console.log(resp);
       setResult(resp.data);
     });
   }, []);
 
-  const renderedList = result.map(store => (
-    <div
-      className="card p-0 my-2 rounded-l"
-      onClick={() => {
-        history.push(`/store/${store.id}`);
-      }}>
-      <div class="d-flex flex-row">
-        <img
-          className="rounded-l mr-2"
-          src={store.store_image}
-          alt=""
-          style={{ width: '200px' }}
-        />
-        <div className="card-content d-flex flex-column">
-          <h4 className="pt-2">{store.name}</h4>
-          <StyledRating
-            name="highlight-selected-only"
-            defaultValue={2}
-            IconContainerComponent={IconContainer}
-            getLabelText={value => customIcons[value].label}
-            highlightSelectedOnly
-            readOnly
+  const renderedList = result.map(store => {
+    return (
+      <div
+        className="card p-0 my-2 rounded-l"
+        onClick={() => {
+          history.push(`/store/${store.id}`);
+        }}>
+        <div class="d-flex flex-row">
+          <img
+            className="rounded-l mr-2"
+            src={store.store_image}
+            alt=""
+            style={{ width: '200px' }}
           />
+          <div className="card-content d-flex flex-column">
+            <h4 className="pt-2">{store.name}</h4>
+            <StyledRating
+              name="highlight-selected-only"
+              value={store.rating}
+              IconContainerComponent={IconContainer}
+              getLabelText={value => {
+                if (value > 0) {
+                  return customIcons[value].label;
+                }
+              }}
+              highlightSelectedOnly
+              readOnly
+            />
+          </div>
         </div>
       </div>
-    </div>
-  ));
+    );
+  });
 
   return (
     <div className="container-fluid">

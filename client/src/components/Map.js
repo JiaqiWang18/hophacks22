@@ -19,8 +19,8 @@ const Map = ({ data }) => {
   };
 
   const defaultCenter = {
-    lat: 39.3274189,
-    lng: -76.6223143
+    lat: 39.327713,
+    lng: -76.616255
   };
   return (
     <LoadScript googleMapsApiKey="AIzaSyA9GG_FwcMPB1TOXIRpmVJojNHLPf-QZeo">

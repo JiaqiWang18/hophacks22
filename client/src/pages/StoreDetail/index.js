@@ -74,9 +74,13 @@ const StoreDetail = ({ match }) => {
               }}>
               <StyledRating
                 name="highlight-selected-only"
-                defaultValue={2}
+                value={storeDetail.rating}
                 IconContainerComponent={IconContainer}
-                getLabelText={value => customIcons[value].label}
+                getLabelText={value => {
+                  if (value > 0) {
+                    return customIcons[value].label;
+                  }
+                }}
                 highlightSelectedOnly
                 readOnly
               />

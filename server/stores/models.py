@@ -19,6 +19,7 @@ class Store(models.Model):
     video_tour = models.FileField(upload_to='videos', blank=True)
     store_image = models.FileField(upload_to='images', blank=True, null=True)
     address = models.CharField(max_length=100, default="Johns Hopkins University, Baltimore")
+    rating = models.IntegerField(default=0)
 
     # geocode upon saving
     def save(self, force_insert=False, force_update=False, using=None,
